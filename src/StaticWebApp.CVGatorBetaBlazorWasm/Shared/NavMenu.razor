@@ -1,0 +1,74 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href=""><div class="text-center text-wrap">CVGator-beta a Blazor WASM Demo</div></a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="search-candidates">
+                <span class="oi oi-magnifying-glass" aria-hidden="true"></span> Quick Search
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="candidates">
+                <span class="oi oi-people" aria-hidden="true"></span> Candidates
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="employers">
+                <span class="oi oi-briefcase" aria-hidden="true"></span> Employers
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="schools">
+                <span class="oi oi-book" aria-hidden="true"></span> Schools
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="certificates">
+                <span class="oi oi-badge" aria-hidden="true"></span> Certificates
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="courses">
+                <span class="oi oi-monitor" aria-hidden="true"></span> Courses
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="categories">
+                <span class="oi oi-folder" aria-hidden="true"></span> Categories
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="countries">
+                <span class="oi oi-globe" aria-hidden="true"></span> Countries
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="testapi">
+                <span class="oi oi-beaker" aria-hidden="true"></span> Test API
+            </NavLink>
+        </div>
+    </nav>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

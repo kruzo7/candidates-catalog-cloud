@@ -1,0 +1,100 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Candidates;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<button type="button" class="btn btn-warning" @onclick="() => Show()">Add Course</button>
+
+@if (showModal)
+{
+    <div class="modal fade show" tabindex="-1" style="display:block;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Course to Candidate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @onclick="Hide"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <label class="form-label">
+                            Course:
+                            <CascadingValue Value="this" >
+                                <CoursesSelect />
+                            </CascadingValue>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label class="form-label">
+                            Start Date:
+                            <InputDate @bind-Value="candidatesCourse.StartDate" class="form-control" />
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label class="form-label">
+                            End Date:
+                            <InputDate @bind-Value="candidatesCourse.EndDate" class="form-control" />
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="Hide">Close</button>
+                    <button type="button" class="btn btn-primary" @onclick="OnAdd">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool showModal;
+
+    public ICollection<CourseDto>? Courses { get; set; }
+
+    public CandidatesCourseDto candidatesCourse { get; set; } = null!;
+
+    [CascadingParameter]
+    public CandidateCoursesEdit? CandidateCoursesEdit { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Courses = await CVGatorHttpClientFactory.Get<CourseDto>().GetAsync();
+
+        showModal = false;
+
+        candidatesCourse = new CandidatesCourseDto()
+            {
+                Course = new CourseDto()
+            };
+    }
+
+    private void OnAdd()
+    {
+        if (candidatesCourse is not null)
+        {
+            CandidateCoursesEdit?.CandidateCourses?.Add(candidatesCourse);
+            CandidateCoursesEdit?.Refresh();
+        }
+
+        Hide();
+    }
+
+    public void Show()
+    {
+        candidatesCourse = new CandidatesCourseDto()
+            {
+                Course = new CourseDto()
+            };
+
+        showModal = true;
+    }
+
+    public void Hide()
+    {
+        showModal = false;
+    }
+
+    public void OnChange(Guid courseId)
+    {
+        candidatesCourse.Course = Courses?.FirstOrDefault(x => x.CourseId == courseId);
+    }
+}

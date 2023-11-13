@@ -1,0 +1,27 @@
+﻿@page "/category/{Id:guid}"
+@page "/category"
+
+@using CVGatorBeta.DTO.Categories;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Categories
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Category</PageTitle>
+
+<h3>Category</h3>
+
+<CategoryEdit Category="@category" />
+
+@code {
+    private CategoryDto? category;
+
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        category = Id.HasValue ? 
+                    await CVGatorHttpClientFactory.Get<CategoryDto>().GetAsync(Id.Value) :
+                    new CategoryDto();
+    }
+}

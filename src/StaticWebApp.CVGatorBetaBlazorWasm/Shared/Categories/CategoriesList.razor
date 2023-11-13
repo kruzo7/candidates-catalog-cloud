@@ -1,0 +1,47 @@
+﻿@using CVGatorBeta.DTO.Categories;
+@inject NavigationManager Navigate;
+
+<button class="btn btn-primary" @onclick="OnAdd">Add Category</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Categories is not null && Categories.Any())
+        {
+            @foreach (var category in Categories)
+            {
+                <tr>
+                    <td>@category.CategoryName</td>
+                    <td><button class="btn btn-secondary" @onclick="@(() => OnEdit(category?.CategoryId))">Edit</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No records...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    
+    [Parameter]
+    public ICollection<CategoryDto>? Categories { get; set; }
+    
+    private void OnAdd()
+    {
+        Navigate.NavigateTo("category");
+    }
+
+    private void OnEdit(Guid? categoryId)
+    {
+        if (categoryId is not null)
+            Navigate.NavigateTo($"category/{categoryId}");
+    }
+}

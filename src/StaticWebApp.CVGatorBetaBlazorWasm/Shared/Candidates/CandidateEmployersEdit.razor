@@ -1,0 +1,61 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Employers
+
+
+<h5>Employers:</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employer Name</th>
+            <th>Employment Start Date</th>
+            <th>Employment End Date</th>
+            <th>Employment Satus</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (CandidateEmployers is not null && CandidateEmployers.Any())
+        {
+            @foreach (var employer in CandidateEmployers)
+            {
+                <tr>
+                    <td>@employer.Employer?.EmployerName</td>
+                    <td><input readonly type="date" @bind="employer.StartDate"></td>
+                    <td><input readonly type="date" @bind="employer.EndDate"></td>
+                    <td>@(Enum.GetName(typeof(CVGatorBeta.DTO.Enums.EmploymentStatus), employer.EmploymentStatus))</td>
+                    <td><button type="button" class="btn btn-danger" @onclick="() => OnDelete(employer.Employer?.EmployerId)">Delete</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No records...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <CascadingValue Value="this">
+        <EmployersModalAdd />
+    </CascadingValue>
+</div>
+
+@code {
+
+    [Parameter]
+    public ICollection<CandidatesEmployerDto>? CandidateEmployers { get; set; }
+
+    private void OnDelete(Guid? employerId)
+    {
+        var item = CandidateEmployers?.FirstOrDefault(x => x.Employer?.EmployerId == employerId);
+        if (item is not null)
+            CandidateEmployers?.Remove(item);
+    }
+
+    public void Refresh()
+    {
+        StateHasChanged();
+    }
+}

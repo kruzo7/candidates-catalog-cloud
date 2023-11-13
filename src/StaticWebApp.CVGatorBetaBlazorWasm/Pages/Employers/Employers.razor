@@ -1,0 +1,22 @@
+﻿@page "/employers"
+
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Employers
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Employers</PageTitle>
+
+<h3>Employers</h3>
+
+<EmployersList Employers="@employers" />
+
+@code {
+
+    private ICollection<EmployerDto>? employers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        employers = await CVGatorHttpClientFactory.Get<EmployerDto>().GetAsync();
+    }
+}

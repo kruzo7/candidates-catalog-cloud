@@ -1,0 +1,21 @@
+﻿@page "/certificates"
+
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Certificates
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Certificates</PageTitle>
+
+<h3>Certificates</h3>
+
+<CertificatesList Certificates="@certificates" />
+
+@code {
+    private ICollection<CertificateDto>? certificates;
+
+    protected override async Task OnInitializedAsync()
+    {
+        certificates = await CVGatorHttpClientFactory.Get<CertificateDto>().GetAsync();
+    }
+}

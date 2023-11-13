@@ -1,0 +1,111 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Candidates;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<button type="button" class="btn btn-warning" @onclick="() => Show()">Add Employer</button>
+
+@if (showModal)
+{
+    <div class="modal fade show" tabindex="-1" style="display:block;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Employer to Candidate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @onclick="Hide"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <label class="form-label">
+                            Employer:
+                            <CascadingValue Value="this">
+                                <EmployersSelect />
+                            </CascadingValue>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label class="form-label">
+                            Start Date:
+                            <InputDate @bind-Value="candidatesEmployer.StartDate" class="form-control" />
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label class="form-label">
+                            End Date:
+                            <InputDate @bind-Value="candidatesEmployer.EndDate" class="form-control" />
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label class="form-label">
+                            Employment Status:
+                            <InputSelect @bind-Value="candidatesEmployer.EmploymentStatus" class="form-control">
+                                @foreach (var status in Enum.GetValues(typeof(CVGatorBeta.DTO.Enums.EmploymentStatus)))
+                                {
+                                    <option value="@((int)status)">@status</option>
+                                }
+                            </InputSelect>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="Hide">Close</button>
+                    <button type="button" class="btn btn-primary" @onclick="OnAdd">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool showModal;
+
+    public ICollection<EmployerDto>? Employers { get; set; }
+
+    public CandidatesEmployerDto candidatesEmployer { get; set; } = null!;
+
+    [CascadingParameter]
+    public CandidateEmployersEdit? CandidateEmployersEdit { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Employers = await CVGatorHttpClientFactory.Get<EmployerDto>().GetAsync();
+
+        showModal = false;
+
+        candidatesEmployer = new CandidatesEmployerDto()
+            {
+                Employer = new EmployerDto()
+            };
+    }
+
+    private void OnAdd()
+    {
+        if (candidatesEmployer is not null)
+        {
+            CandidateEmployersEdit?.CandidateEmployers?.Add(candidatesEmployer);
+            CandidateEmployersEdit?.Refresh();
+        }
+
+        Hide();
+    }
+
+    public void Show()
+    {
+        candidatesEmployer = new CandidatesEmployerDto()
+            {
+                Employer = new EmployerDto()
+            };
+
+        showModal = true;
+    }
+
+    public void Hide()
+    {
+        showModal = false;
+    }
+
+    public void OnChange(Guid employerId)
+    {
+        candidatesEmployer.Employer = Employers?.FirstOrDefault(x => x.EmployerId == employerId);
+    }
+}

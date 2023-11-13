@@ -1,0 +1,47 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@inject NavigationManager Navigate;
+
+<button class="btn btn-primary" @onclick="OnAdd">Add Certificate</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Certificate Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Certificates is not null && Certificates.Any())
+        {
+            @foreach (var certificate in Certificates)
+            {
+                <tr>
+                    <td>@certificate.CertificateName</td>
+                    <td><button class="btn btn-secondary" @onclick="@(() => OnEdit(certificate?.CertificateId))">Edit</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No records...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    
+    [Parameter]
+    public ICollection<CertificateDto>? Certificates { get; set; }
+    
+    private void OnAdd()
+    {
+        Navigate.NavigateTo("certificate");
+    }
+
+    private void OnEdit(Guid? certificateId)
+    {
+        if (certificateId is not null)
+            Navigate.NavigateTo($"certificate/{certificateId}");
+    }
+}

@@ -1,0 +1,44 @@
+﻿@using CVGatorBeta.DTO.Categories;
+
+
+<select @bind="SelectedCategoryId" class="form-control">
+    <option value=""></option>
+    @if (Categories is not null)
+    {
+        foreach (var category in Categories)
+        {
+            <option value="@category.CategoryId">@category.CategoryName</option>
+        }
+    }
+</select>
+
+@code {
+
+    [CascadingParameter]
+    public CategoriesModalAdd? CategoriesModalAdd { get; set; }
+
+    private Guid? _selectedCategoryId;
+    public Guid? SelectedCategoryId
+    {
+        get { return _selectedCategoryId; }
+
+        set
+        {
+            _selectedCategoryId = value;
+            OnChange();
+        }
+    }
+
+    [Parameter]
+    public ICollection<CategoryDto>? Categories { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Categories = CategoriesModalAdd?.Categories;
+    }
+
+    public void OnChange()
+    {
+        CategoriesModalAdd?.OnChange(SelectedCategoryId.GetValueOrDefault());
+    }
+}

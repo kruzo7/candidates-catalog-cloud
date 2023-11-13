@@ -1,0 +1,21 @@
+﻿@page "/courses"
+
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Courses
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Courses</PageTitle>
+
+<h3>Courses</h3>
+
+<CoursesList Courses="@courses" />
+
+@code {
+    private ICollection<CourseDto>? courses;
+
+    protected override async Task OnInitializedAsync()
+    {
+        courses = await CVGatorHttpClientFactory.Get<CourseDto>().GetAsync();
+    }
+}

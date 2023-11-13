@@ -1,0 +1,58 @@
+﻿@using CVGatorBeta.DTO.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Candidates;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<select @bind="SelectedCountryId" class="form-control">
+    <option value=""></option>
+    @if (Countries is not null)
+    {
+        foreach (var country in Countries)
+        {
+            <option value="@country.CountryId">@country.CountryName</option>
+        }
+    }
+</select>
+
+@code {
+
+    private Guid? _currentCountryId { get => CandidateAddressEdit?.CandidateAddress?.Country?.CountryId; }
+    private ICollection<CountryDto>? Countries { get; set; }
+
+    [CascadingParameter]
+    public CandidateAddressEdit? CandidateAddressEdit { get; set; }
+
+    private Guid? _selectedCountryId;
+    public Guid? SelectedCountryId
+    {
+        get { return _selectedCountryId; }
+
+        set
+        {
+            _selectedCountryId = value;
+            OnChange();
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Countries = await CVGatorHttpClientFactory.Get<CountryDto>().GetAsync();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (_currentCountryId.HasValue)
+        {
+            SelectedCountryId = _currentCountryId.Value;
+        }
+    }
+
+    public void OnChange()
+    {
+        var country = Countries?.FirstOrDefault(x => x.CountryId == SelectedCountryId);
+        if (country != null)
+        {
+            CandidateAddressEdit?.OnChangeCountry(country);
+        }
+    }
+}

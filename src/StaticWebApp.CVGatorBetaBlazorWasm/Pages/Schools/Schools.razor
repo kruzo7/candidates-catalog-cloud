@@ -1,0 +1,21 @@
+﻿@page "/schools"
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Schools
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Schools</PageTitle>
+
+<h3>Schools</h3>
+
+<SchoolsList Schools="@schools" />
+
+@code {
+    private ICollection<SchoolDto>? schools;
+
+    protected override async Task OnInitializedAsync()
+    {
+        schools = await CVGatorHttpClientFactory.Get<SchoolDto>().GetAsync();
+    }
+}

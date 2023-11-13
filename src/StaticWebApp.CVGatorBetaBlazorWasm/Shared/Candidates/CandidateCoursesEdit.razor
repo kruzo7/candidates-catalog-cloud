@@ -1,0 +1,60 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Courses
+
+
+<h5>Courses:</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Course</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (CandidateCourses is not null && CandidateCourses.Any())
+        {
+            @foreach (var courses in CandidateCourses)
+            {
+                <tr>
+                    <td>@courses.Course?.CourseName</td>
+                    <td><input readonly type="date" @bind="courses.StartDate"></td>
+                    <td><input readonly type="date" @bind="courses.EndDate"></td>
+                    <td><button type="button" class="btn btn-danger" @onclick="() => OnDelete(courses.Course?.CourseId)">Delete</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No records...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <CascadingValue Value="this">
+        <CoursesModalAdd />
+    </CascadingValue>
+</div>
+
+@code {
+
+    [Parameter]
+    public ICollection<CandidatesCourseDto>? CandidateCourses { get; set; }
+
+    private void OnDelete(Guid? courseId)
+    {
+        var item = CandidateCourses?.FirstOrDefault(x => x.Course?.CourseId == courseId);
+        if (item is not null)
+            CandidateCourses?.Remove(item);
+    }
+
+    public void Refresh()
+    {
+        StateHasChanged();
+    }
+
+}

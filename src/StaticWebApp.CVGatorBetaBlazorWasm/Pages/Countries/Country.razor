@@ -1,0 +1,27 @@
+﻿@page "/country/{Id:guid}"
+@page "/country"
+
+@using CVGatorBeta.DTO.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Countries
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Country</PageTitle>
+
+<h3>Country</h3>
+
+<CountryEdit Country="@country" />
+
+@code {
+    private CountryDto? country;
+
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        country = Id.HasValue ? 
+                    await CVGatorHttpClientFactory.Get<CountryDto>().GetAsync(Id.Value) :
+                    new CountryDto();
+    }
+}

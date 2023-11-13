@@ -1,0 +1,55 @@
+﻿@using CVGatorBeta.DTO.Categories;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Categories
+
+<h5>Categories: (Required)</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (CandidateCategories is not null && CandidateCategories.Any())
+        {
+            @foreach (var category in CandidateCategories)
+            {
+                <tr>
+                    <td>@category?.Category?.CategoryName</td>
+                    <td><button type="button" class="btn btn-danger" @onclick="() => OnDelete(category?.Category?.CategoryId)">Delete</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No records...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <CascadingValue Value="this">
+        <CategoriesModalAdd />
+    </CascadingValue>
+</div>
+
+@code {
+
+
+    [Parameter]
+    public ICollection<CandidateCategoryDto>? CandidateCategories { get; set; }
+
+    private void OnDelete(Guid? categoryId)
+    {
+        var item = CandidateCategories?.FirstOrDefault(x => x.Category?.CategoryId == categoryId);
+        if (item is not null)
+            CandidateCategories?.Remove(item);
+    }
+
+    public void Refresh()
+    {
+        StateHasChanged();
+    }
+}

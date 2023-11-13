@@ -1,0 +1,76 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+@inject NavigationManager Navigate;
+
+<h5>@mode</h5>
+
+@if (Employer != null)
+{
+    <EditForm Model="@Employer" class="row">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <label class="form-label">
+                    Employer Name:
+                    <InputText @bind-Value="Employer.EmployerName" class="form-control" />
+                </label>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <button type="button" class="btn btn-secondary" @onclick="OnBack">Back</button>
+                <button type="button" class="btn btn-primary" @onclick="OnSave">Save</button>
+            </div>
+        </div>
+        @if (Employer?.EmployerId != null)
+        {
+            <div class="row mb-5">
+                <div class="col-3">
+                    <button type="button" class="btn btn-danger" @onclick="OnDelete">Delete</button>
+                </div>
+            </div>
+        }
+    </EditForm>
+}
+
+
+@code {
+
+    private string? mode;
+    private CVGatorAdminHttpClient<EmployerDto> _cvGatorAdminHttpClient = null!;
+
+    [Parameter]
+    public EmployerDto Employer { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        _cvGatorAdminHttpClient = CVGatorHttpClientFactory.Get<EmployerDto>();
+        mode = Employer?.EmployerId == null ? "New" : "Edit";
+    }
+
+    private async void OnSave()
+    {
+        if (Employer.EmployerId.HasValue)
+            await _cvGatorAdminHttpClient.PutAsync(Employer.EmployerId.Value, Employer);
+        else
+            Employer.EmployerId = await _cvGatorAdminHttpClient.PostAsync(Employer);
+    }
+
+    private void OnBack()
+    {
+        Navigate.NavigateTo("employers");
+    }
+
+    private async void OnDelete()
+    {
+        if (Employer.EmployerId.HasValue)
+        {
+            await _cvGatorAdminHttpClient.DeleteAsync(Employer.EmployerId.Value);
+            Navigate.NavigateTo("employers");
+        }
+    }
+}

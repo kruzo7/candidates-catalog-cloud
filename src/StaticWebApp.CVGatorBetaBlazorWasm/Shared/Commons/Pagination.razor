@@ -1,0 +1,70 @@
+﻿@typeparam T
+@using StaticWebApp.CVGatorBetaBlazorWasm.Commons;
+
+<div class="row">
+    @if (PaginatedList != null && PaginatedList.Any())
+    {
+        string prevEnabled = _prevPagingLinks.Enabled ? "" : "disabled";
+        string nextEnabled = _nextPagingLinks.Enabled ? "" : "disabled";
+
+        <nav>
+            <ul class="pagination">
+                <li class="page-item @prevEnabled">
+                    <a class="page-link" @onclick="() => OnSelectedPage(_prevPagingLinks)">Previous</a>
+                </li>
+
+                @foreach (var pageLink in _pagingLinks)
+                {
+                    string active = pageLink.Active ? "active" : "";
+
+                    <li class="page-item @active">
+                        <a class="page-link" @onclick="() => OnSelectedPage(pageLink)">@pageLink.Page</a>
+                    </li>
+                }
+
+                <li class="page-item @nextEnabled">
+                    <a class="page-link" @onclick="() => OnSelectedPage(_nextPagingLinks)">Next</a>
+                </li>
+            </ul>
+        </nav>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public PaginatedList<T> PaginatedList { get; set; } = null!;
+
+    [Parameter]
+    public EventCallback<int> OnPageSelected { get; set; }
+
+    private List<PagingLink> _pagingLinks { get; set; } = null!;
+    private PagingLink _prevPagingLinks { get; set; } = null!;
+    private PagingLink _nextPagingLinks { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        CreatePaginationLinks();
+    }
+
+    private void CreatePaginationLinks()
+    {
+        _prevPagingLinks = new PagingLink(PaginatedList.CurrentPage - 1, PaginatedList.HasPrevious);
+        _nextPagingLinks = new PagingLink(PaginatedList.CurrentPage + 1, PaginatedList.HasNext);
+
+        _pagingLinks = new List<PagingLink>();
+
+        for (int i = 1; i <= PaginatedList.TotalPages; i++)        
+        {
+            _pagingLinks.Add(new PagingLink(i, true) { Active = PaginatedList.CurrentPage == i });
+        }
+    }
+
+    private async Task OnSelectedPage(PagingLink link)
+    {
+        if (link.Page == PaginatedList.CurrentPage || !link.Enabled)
+            return;
+
+        PaginatedList.CurrentPage = link.Page;
+        await OnPageSelected.InvokeAsync(link.Page);
+    }
+}

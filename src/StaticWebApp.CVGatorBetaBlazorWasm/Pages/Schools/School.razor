@@ -1,0 +1,27 @@
+﻿@page "/school/{Id:guid}"
+@page "/school"
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Schools
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>School</PageTitle>
+
+<h3>School</h3>
+
+<SchoolEdit School="@school" />
+
+@code {
+    private SchoolDto? school;
+
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {   
+        school = Id.HasValue ? 
+                    await CVGatorHttpClientFactory.Get<SchoolDto>().GetAsync(Id.Value) :
+                    new SchoolDto();
+    }
+}

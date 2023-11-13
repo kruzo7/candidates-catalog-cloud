@@ -1,0 +1,146 @@
+﻿@page "/search-candidates"
+
+@using CVGatorBeta.DTO.Search;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Commons
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Quick Search Candidates</PageTitle>
+<h3>Quick Search Candidates</h3>
+
+<EditForm Model="_searchCandidateRequest">
+    <div class="row mb-5">
+        <div class="col-3">
+            <label class="form-label">
+                Search text:
+                <input @bind="_searchCandidateRequest.SearchText" @bind:event="oninput" class="form-control" @onkeypress="OnKeyPressSearch" />
+            </label>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" @onclick="Search">Search</button>
+</EditForm>
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Birth Date</th>
+                <th>Categories</th>
+                <th>Actual Employers</th>
+                <th>Employers</th>
+                <th>Schools</th>
+                <th>Certificates</th>
+                <th>Courses</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (_paginatedList != null && _paginatedList.Any())
+            {
+                foreach (var item in _paginatedList)
+                {
+                    <tr>
+                        <td>
+                            @item.CandidateFirstName
+                        </td>
+                        <td>
+                            @item.CandidateLastName
+                        </td>
+                        <td>
+                            @DateTimeFormats.GetDate(@item.BirthDate)
+                        </td>
+                        <td>
+                            @StringFormats.FromList(@item.CandidateCategories)
+                        </td>
+                        <td>
+                            @StringFormats.FromList(@item.CandidateActualEmployers)
+                        </td>
+                        <td>
+                            @StringFormats.FromList(@item.CandidateEmployers)
+                        </td>
+                        <td>
+                            @StringFormats.FromList(@item.CandidateSchools)
+                        </td>
+                        <td>
+                            @StringFormats.FromList(@item.CandidateCertificates)
+                        </td>
+                        <td>
+                            @StringFormats.FromList(@item.CandidateCourses)
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    Search results...
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<Pagination PaginatedList="_paginatedList" OnPageSelected="SearchByPage" />
+
+@code {
+
+    private CVGatorAdminHttpClient<SearchCandidateRequestDto> _cvGatorAdminHttpClient = null!;
+
+    private SearchCandidateRequestDto _searchCandidateRequest { get; set; } = null!;
+
+    private PaginatedList<SearchCandidateDto> _paginatedList { get; set; } = null!;
+
+    protected override void OnInitialized()
+    {
+        _cvGatorAdminHttpClient = CVGatorHttpClientFactory.Get<SearchCandidateRequestDto>();
+        _searchCandidateRequest = new SearchCandidateRequestDto() { PageNumber = 1 };
+        _paginatedList = new PaginatedList<SearchCandidateDto>(new List<SearchCandidateDto>());
+    }
+
+    private async Task Search()
+    {
+        if (SearchTextNotEmpty())
+        {
+            _searchCandidateRequest.PageNumber = 1;
+            var searchCandidateResponse = await _cvGatorAdminHttpClient.PostAsync<SearchCandidateResponseDto>(_searchCandidateRequest);
+            SetPaginatedList(searchCandidateResponse);
+            StateHasChanged();
+        }
+    }
+
+    private async Task SearchByPage(int pageNumber)
+    {
+        if (SearchTextNotEmpty())
+        {
+            _searchCandidateRequest.PageNumber = pageNumber;
+            var searchCandidateResponse = await _cvGatorAdminHttpClient.PostAsync<SearchCandidateResponseDto>(_searchCandidateRequest);
+            SetPaginatedList(searchCandidateResponse);
+            StateHasChanged();
+        }
+    }
+
+    private async Task OnKeyPressSearch(KeyboardEventArgs arg)
+    {
+        if (KeyboardKeys.IsEnter(arg.Code))
+            await Search();
+    }
+
+    private bool SearchTextNotEmpty()
+    {
+        return !string.IsNullOrEmpty(_searchCandidateRequest.SearchText);
+    }
+
+    private void SetPaginatedList(SearchCandidateResponseDto? searchCandidateResponse)
+    {
+        if (searchCandidateResponse != null &&
+            searchCandidateResponse.SearchCandidateDtos.Any())
+        {
+            _paginatedList.Clear();
+            _paginatedList.AddRange(searchCandidateResponse!.SearchCandidateDtos);
+            _paginatedList.CurrentPage = searchCandidateResponse.Page;
+            _paginatedList.TotalPages = searchCandidateResponse.TotalPages;
+        }
+    }
+}

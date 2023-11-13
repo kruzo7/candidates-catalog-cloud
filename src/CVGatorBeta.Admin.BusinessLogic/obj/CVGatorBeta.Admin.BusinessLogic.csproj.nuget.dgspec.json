@@ -1,0 +1,276 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.BusinessLogic/CVGatorBeta.Admin.BusinessLogic.csproj": {}
+  },
+  "projects": {
+    "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.BusinessLogic/CVGatorBeta.Admin.BusinessLogic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.BusinessLogic/CVGatorBeta.Admin.BusinessLogic.csproj",
+        "projectName": "CVGatorBeta.Admin.BusinessLogic",
+        "projectPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.BusinessLogic/CVGatorBeta.Admin.BusinessLogic.csproj",
+        "packagesPath": "/home/waldek/.nuget/packages/",
+        "outputPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.BusinessLogic/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/waldek/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.EntityFramework/CVGatorBeta.Admin.EntityFramework.csproj": {
+                "projectPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.EntityFramework/CVGatorBeta.Admin.EntityFramework.csproj"
+              },
+              "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Commons/CVGatorBeta.Commons.csproj": {
+                "projectPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Commons/CVGatorBeta.Commons.csproj"
+              },
+              "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.DTO/CVGatorBeta.DTO.csproj": {
+                "projectPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.DTO/CVGatorBeta.DTO.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[11.1.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.416/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.EntityFramework/CVGatorBeta.Admin.EntityFramework.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.EntityFramework/CVGatorBeta.Admin.EntityFramework.csproj",
+        "projectName": "CVGatorBeta.Admin.EntityFramework",
+        "projectPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.EntityFramework/CVGatorBeta.Admin.EntityFramework.csproj",
+        "packagesPath": "/home/waldek/.nuget/packages/",
+        "outputPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Admin.EntityFramework/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/waldek/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.416/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Commons/CVGatorBeta.Commons.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Commons/CVGatorBeta.Commons.csproj",
+        "projectName": "CVGatorBeta.Commons",
+        "projectPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Commons/CVGatorBeta.Commons.csproj",
+        "packagesPath": "/home/waldek/.nuget/packages/",
+        "outputPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.Commons/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/waldek/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.DTO/CVGatorBeta.DTO.csproj": {
+                "projectPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.DTO/CVGatorBeta.DTO.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Azure.Functions.Worker": {
+              "target": "Package",
+              "version": "[1.10.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.416/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.DTO/CVGatorBeta.DTO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.DTO/CVGatorBeta.DTO.csproj",
+        "projectName": "CVGatorBeta.DTO",
+        "projectPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.DTO/CVGatorBeta.DTO.csproj",
+        "packagesPath": "/home/waldek/.nuget/packages/",
+        "outputPath": "/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/CVGatorBeta.DTO/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/waldek/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.416/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

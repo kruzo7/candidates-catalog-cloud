@@ -1,0 +1,47 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@inject NavigationManager Navigate;
+
+<button class="btn btn-primary" @onclick="OnAdd">Add School</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th>School Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Schools is not null && Schools.Any())
+        {
+            @foreach (var school in Schools)
+            {
+                <tr>
+                    <td>@school.SchoolName</td>
+                    <td><button class="btn btn-secondary" @onclick="@(() => OnEdit(school?.SchoolId))">Edit</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No records...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    
+    [Parameter]
+    public ICollection<SchoolDto>? Schools { get; set; }
+    
+    private void OnAdd()
+    {
+        Navigate.NavigateTo("school");
+    }
+
+    private void OnEdit(Guid? schoolId)
+    {
+        if (schoolId is not null)
+            Navigate.NavigateTo($"school/{schoolId}");
+    }
+}

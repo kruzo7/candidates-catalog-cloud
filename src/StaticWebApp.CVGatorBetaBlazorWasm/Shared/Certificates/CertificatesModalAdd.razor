@@ -1,0 +1,103 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Candidates;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<button type="button" class="btn btn-warning" @onclick="() => Show()">Add Certificate</button>
+
+@if (showModal)
+{
+    <div class="modal fade show" tabindex="-1" style="display:block;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Certificate to Candidate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @onclick="Hide"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <label class="form-label">
+                            Certificate:
+                            <CascadingValue Value="this" >
+                                <CertificatesSelect />
+                            </CascadingValue>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label class="form-label">
+                            Start Date:
+                            <InputDate @bind-Value="candidatesCertificate.StartDate" class="form-control" />
+                        </label>
+                    </div>
+                    <div class="row">
+                        <label class="form-label">
+                            End Date:
+                            <InputDate @bind-Value="candidatesCertificate.EndDate" class="form-control" />
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="Hide">Close</button>
+                    <button type="button" class="btn btn-primary" @onclick="OnAdd">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool showModal;
+
+    public ICollection<CertificateDto>? Certificates { get; set; }
+
+    public CandidatesCertificateDto candidatesCertificate { get; set; } = null!;
+
+    [CascadingParameter]
+    public CandidateCertificatesEdit? CandidateCertificatesEdit { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Certificates = await CVGatorHttpClientFactory.Get<CertificateDto>().GetAsync();
+    }
+
+    protected override void OnParametersSet()
+    {
+        showModal = false;
+
+        candidatesCertificate = new CandidatesCertificateDto()
+            {
+                Certificate = new CertificateDto()
+            };
+    }
+
+    private void OnAdd()
+    {
+        if (candidatesCertificate is not null)
+        {
+            CandidateCertificatesEdit?.CandidateCertificates?.Add(candidatesCertificate);
+            CandidateCertificatesEdit?.Refresh();
+        }
+
+        Hide();
+    }
+
+    public void Show()
+    {
+        candidatesCertificate = new CandidatesCertificateDto()
+            {
+                Certificate = new CertificateDto()
+            };
+
+        showModal = true;
+    }
+
+    public void Hide()
+    {
+        showModal = false;
+    }
+
+    public void OnChange(Guid certificateId)
+    {
+        candidatesCertificate.Certificate = Certificates?.FirstOrDefault(x => x.CertificateId == certificateId);
+    }
+}

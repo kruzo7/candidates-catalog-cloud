@@ -1,0 +1,59 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Certificates
+
+<h5>Certificates:</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Certificate</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (CandidateCertificates is not null && CandidateCertificates.Any())
+        {
+            @foreach (var certificate in CandidateCertificates)
+            {
+                <tr>
+                    <td>@certificate?.Certificate?.CertificateName</td>
+                    <td><input readonly type="date" @bind="certificate!.StartDate"></td>
+                    <td><input readonly type="date" @bind="certificate.EndDate"></td>
+                    <td><button type="button" class="btn btn-danger" @onclick="() => OnDelete(certificate?.Certificate?.CertificateId)">Delete</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No records...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <CascadingValue Value="this">
+        <CertificatesModalAdd />
+    </CascadingValue>
+</div>
+
+@code {
+
+    [Parameter]
+    public ICollection<CandidatesCertificateDto>? CandidateCertificates { get; set; }
+
+    private void OnDelete(Guid? certificateId)
+    {
+        var item = CandidateCertificates?.FirstOrDefault(x => x.Certificate?.CertificateId == certificateId);
+        if (item is not null)
+            CandidateCertificates?.Remove(item);
+    }
+
+    public void Refresh()
+    {
+        StateHasChanged();
+    }
+
+}

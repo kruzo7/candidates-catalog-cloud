@@ -1,0 +1,76 @@
+﻿@using CVGatorBeta.DTO.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+@inject NavigationManager Navigate;
+
+<h5>@mode</h5>
+
+@if (Country != null)
+{
+    <EditForm Model="@Country" class="row">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <label class="form-label">
+                    Country Name:
+                    <InputText @bind-Value="Country.CountryName" class="form-control" />
+                </label>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <button type="button" class="btn btn-secondary" @onclick="OnBack">Back</button>
+                <button type="button" class="btn btn-primary" @onclick="OnSave">Save</button>
+            </div>
+        </div>
+        @if (Country?.CountryId != null)
+        {
+            <div class="row mb-5">
+                <div class="col-3">
+                    <button type="button" class="btn btn-danger" @onclick="OnDelete">Delete</button>
+                </div>
+            </div>
+        }
+    </EditForm>
+}
+
+
+@code {
+    private string? mode;
+    private CVGatorAdminHttpClient<CountryDto> _cvGatorAdminHttpClient = null!;
+
+    [Parameter]
+    public CountryDto Country { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        _cvGatorAdminHttpClient = CVGatorHttpClientFactory.Get<CountryDto>();
+
+        mode = Country?.CountryId == null ? "New" : "Edit";
+    }
+
+    private async void OnSave()
+    {
+        if (Country.CountryId.HasValue)
+            await _cvGatorAdminHttpClient.PutAsync(Country.CountryId.Value, Country);
+        else
+            Country.CountryId = await _cvGatorAdminHttpClient.PostAsync(Country);
+    }
+
+    private void OnBack()
+    {
+        Navigate.NavigateTo("countries");
+    }
+
+    private async void OnDelete()
+    {
+        if (Country.CountryId.HasValue)
+        {
+            await _cvGatorAdminHttpClient.DeleteAsync(Country.CountryId.Value);
+            Navigate.NavigateTo("countries");
+        }
+    }
+}

@@ -1,0 +1,27 @@
+﻿@page "/employer/{Id:guid}"
+@page "/employer"
+
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Employers
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Employer</PageTitle>
+
+<h3>Employer</h3>
+
+<EmployerEdit Employer="@employer" />
+
+@code {
+    private EmployerDto? employer;
+
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        employer = Id.HasValue ?
+                    await CVGatorHttpClientFactory.Get<EmployerDto>().GetAsync(Id.Value) :
+                    new EmployerDto();
+    }
+}

@@ -1,0 +1,21 @@
+﻿@page "/countries"
+
+@using CVGatorBeta.DTO.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Countries
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Countries</PageTitle>
+
+<h3>Countries</h3>
+
+<CountriesList Countries="@countries" />
+
+@code {
+    private ICollection<CountryDto>? countries;
+
+    protected override async Task OnInitializedAsync()
+    {
+        countries = await CVGatorHttpClientFactory.Get<CountryDto>().GetAsync();
+    }
+}

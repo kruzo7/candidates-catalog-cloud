@@ -1,0 +1,29 @@
+﻿@page "/candidate/{Id:guid}"
+@page "/candidate"
+
+@using CVGatorBeta.DTO.CandidateDetails;
+@using CVGatorBeta.DTO.Candidates;
+@using CVGatorBeta.DTO.Categories;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Candidates
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Candidate</PageTitle>
+
+<h3>Candidate</h3>
+
+<CandidateEdit  Candidate="@candidate" />
+
+@code {
+    private CandidateDto? candidate;
+
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        candidate = Id.HasValue ?
+                    await CVGatorHttpClientFactory.Get<CandidateDto>().GetAsync(Id.Value) :
+                    new CandidateDto();
+    }
+}

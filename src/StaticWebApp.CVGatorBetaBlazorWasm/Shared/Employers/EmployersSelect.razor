@@ -1,0 +1,44 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+
+
+<select @bind="SelectedEmployerId" class="form-control">
+    <option value=""></option>
+    @if (Employers is not null)
+    {
+        foreach (var employer in Employers)
+        {
+            <option value="@employer.EmployerId">@employer.EmployerName</option>
+        }
+    }
+</select>
+
+@code {
+
+    [CascadingParameter]
+    public EmployersModalAdd? EmployersModalAdd { get; set; }
+
+    private Guid? _selectedEmployerId;
+    public Guid? SelectedEmployerId
+    {
+        get { return _selectedEmployerId; }
+
+        set
+        {
+            _selectedEmployerId = value;
+            OnChange();
+        }
+    }
+
+    [Parameter]
+    public ICollection<EmployerDto>? Employers { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Employers = EmployersModalAdd?.Employers;
+    }
+
+    public void OnChange()
+    {
+        EmployersModalAdd?.OnChange(SelectedEmployerId.GetValueOrDefault());
+    }
+}

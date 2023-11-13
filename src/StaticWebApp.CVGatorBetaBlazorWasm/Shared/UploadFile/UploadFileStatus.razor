@@ -1,0 +1,21 @@
+﻿@using CVGatorBeta.Commons.Enums;
+
+Status: @(Enum.GetName(typeof(UploadStatus), (UploadStatus)UploadStatus))
+
+@if (!string.IsNullOrEmpty(Message))
+{
+    <br />
+    <span>Message: </span>
+
+    @Message
+}
+
+@code {
+
+    [Parameter]
+    public string Message { get; set; } = null!;
+
+    [Parameter]
+    public int UploadStatus { get; set; }
+
+}

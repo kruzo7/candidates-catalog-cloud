@@ -1,0 +1,56 @@
+﻿@using CVGatorBeta.DTO.Candidates;
+@inject NavigationManager Navigate;
+
+<div class="row my-5">
+    <div class="col-3">
+        <button type="button" class="btn btn-primary" @onclick="OnAdd">Add Candidate</button>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Birth Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Candidates is not null && Candidates.Any())
+        {
+            @foreach (var candidate in Candidates)
+            {
+                <tr>
+                    <td>@candidate.CandidateFirstName</td>
+                    <td>@candidate.CandidateLastName</td>
+                    <td><input readonly type="date" @bind="@candidate.BirthDate"></td>
+                    <td><button class="btn btn-secondary" @onclick="@(() => OnEdit(candidate?.CandidateId))">Edit</button></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No records...</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+
+    [Parameter]
+    public ICollection<CandidateDto>? Candidates { get; set; }
+
+    private void OnAdd()
+    {
+        Navigate.NavigateTo("candidate");
+    }
+
+    private void OnEdit(Guid? candidateId)
+    {
+        if (candidateId is not null)
+            Navigate.NavigateTo($"candidate/{candidateId}");
+    }
+}

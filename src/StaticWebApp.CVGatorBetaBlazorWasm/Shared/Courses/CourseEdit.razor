@@ -1,0 +1,75 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+@inject NavigationManager Navigate;
+
+<h5>@mode</h5>
+
+@if (Course != null)
+{
+    <EditForm Model="@Course" class="row">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <label class="form-label">
+                    Course Name:
+                    <InputText @bind-Value="Course.CourseName" class="form-control" />
+                </label>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <button type="button" class="btn btn-secondary" @onclick="OnBack">Back</button>
+                <button type="button" class="btn btn-primary" @onclick="OnSave">Save</button>
+            </div>
+        </div>
+        @if (Course?.CourseId != null)
+        {
+            <div class="row mb-5">
+                <div class="col-3">
+                    <button type="button" class="btn btn-danger" @onclick="OnDelete">Delete</button>
+                </div>
+            </div>
+        }
+    </EditForm>
+}
+
+
+@code {
+    private string? mode;
+    private CVGatorAdminHttpClient<CourseDto> _cvGatorAdminHttpClient = null!;
+
+    [Parameter]
+    public CourseDto Course { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        _cvGatorAdminHttpClient = CVGatorHttpClientFactory.Get<CourseDto>();
+        mode = Course?.CourseId == null ? "New" : "Edit";
+    }
+
+    private async void OnSave()
+    {
+        if (Course.CourseId.HasValue)
+            await _cvGatorAdminHttpClient.PutAsync(Course.CourseId.Value, Course);
+        else
+            Course.CourseId = await _cvGatorAdminHttpClient.PostAsync(Course);
+    }
+
+    private void OnBack()
+    {
+        Navigate.NavigateTo("courses");
+    }
+
+    private async void OnDelete()
+    {
+        if (Course.CourseId.HasValue)
+        {
+            await _cvGatorAdminHttpClient.DeleteAsync(Course.CourseId.Value);
+            Navigate.NavigateTo("courses");
+        }
+    }
+}

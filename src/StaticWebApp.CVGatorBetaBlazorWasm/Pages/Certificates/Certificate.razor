@@ -1,0 +1,27 @@
+﻿@page "/certificate/{Id:guid}"
+@page "/certificate"
+
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Certificates
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Certificate</PageTitle>
+
+<h3>Certificate</h3>
+
+<CertificateEdit Certificate="@certificate" />
+
+@code {
+    private CertificateDto? certificate;
+
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        certificate = Id.HasValue ?
+                    await CVGatorHttpClientFactory.Get<CertificateDto>().GetAsync(Id.Value) :
+                    new CertificateDto();
+    }
+}

@@ -1,0 +1,43 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+
+<select @bind="SelectedCourseId" class="form-control">
+    <option value=""></option>
+    @if (Courses is not null)
+    {
+        foreach (var course in Courses)
+        {
+            <option value="@course.CourseId">@course.CourseName</option>
+        }
+    }
+</select>
+
+@code {
+
+    [CascadingParameter]
+    public CoursesModalAdd? CoursesModalAdd { get; set; }
+
+    private Guid? _selectedCourseId;
+    public Guid? SelectedCourseId
+    {
+        get { return _selectedCourseId; }
+
+        set
+        {
+            _selectedCourseId = value;
+            OnChange();
+        }
+    }
+
+    [Parameter]
+    public ICollection<CourseDto>? Courses { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Courses = CoursesModalAdd?.Courses;
+    }
+
+    public void OnChange()
+    {
+        CoursesModalAdd?.OnChange(SelectedCourseId.GetValueOrDefault());
+    }
+}

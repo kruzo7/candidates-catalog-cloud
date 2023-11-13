@@ -1,0 +1,75 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+@inject NavigationManager Navigate;
+
+<h5>@mode</h5>
+
+@if (School != null)
+{
+    <EditForm Model="@School" class="row">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <label class="form-label">
+                    School Name:
+                    <InputText @bind-Value="School.SchoolName" class="form-control" />
+                </label>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <button type="button" class="btn btn-secondary" @onclick="OnBack">Back</button>
+                <button type="button" class="btn btn-primary" @onclick="OnSave">Save</button>
+            </div>
+        </div>
+        @if (School?.SchoolId != null)
+        {
+            <div class="row mb-5">
+                <div class="col-3">
+                    <button type="button" class="btn btn-danger" @onclick="OnDelete">Delete</button>
+                </div>
+            </div>
+        }
+    </EditForm>
+}
+
+
+@code {
+    private string? mode;
+    private CVGatorAdminHttpClient<SchoolDto> _cvGatorAdminHttpClient = null!;
+
+    [Parameter]
+    public SchoolDto School { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        _cvGatorAdminHttpClient = CVGatorHttpClientFactory.Get<SchoolDto>();
+        mode = School?.SchoolId == null ? "New" : "Edit";
+    }
+
+    private async void OnSave()
+    {
+        if (School.SchoolId.HasValue)
+            await _cvGatorAdminHttpClient.PutAsync(School.SchoolId.Value, School);
+        else
+            School.SchoolId = await _cvGatorAdminHttpClient.PostAsync(School);
+    }
+
+    private void OnBack()
+    {
+        Navigate.NavigateTo("schools");
+    }
+
+    private async void OnDelete()
+    {
+        if (School.SchoolId.HasValue)
+        {
+            await _cvGatorAdminHttpClient.DeleteAsync(School.SchoolId.Value);
+            Navigate.NavigateTo("schools");
+        }
+    }
+}

@@ -1,0 +1,27 @@
+﻿@page "/course/{Id:guid}"
+@page "/course"
+
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Courses
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Course</PageTitle>
+
+<h3>Course</h3>
+
+<CourseEdit Course="@course" />
+
+@code {
+    private CourseDto? course;
+    
+    [Parameter]
+    public Guid? Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        course = Id.HasValue ? 
+                    await CVGatorHttpClientFactory.Get<CourseDto>().GetAsync(Id.Value) :
+                    new CourseDto();
+    }
+}

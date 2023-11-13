@@ -1,0 +1,77 @@
+﻿@inject NavigationManager Navigate;
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<h5>@mode</h5>
+
+@if (Certificate != null)
+{
+    <EditForm Model="@Certificate" class="row">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <label class="form-label">
+                    Certificate Name:
+                    <InputText @bind-Value="Certificate.CertificateName" class="form-control" />
+                </label>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <button type="button" class="btn btn-secondary" @onclick="OnBack">Back</button>
+                <button type="button" class="btn btn-primary" @onclick="OnSave">Save</button>
+            </div>
+        </div>
+        @if (Certificate?.CertificateId != null)
+        {
+            <div class="row mb-5">
+                <div class="col-3">
+                    <button type="button" class="btn btn-danger" @onclick="OnDelete">Delete</button>
+                </div>
+            </div>
+        }
+    </EditForm>
+}
+
+
+@code {
+
+    private CVGatorAdminHttpClient<CertificateDto> _cvGatorAdminHttpClient = null!;
+    private string? mode;
+
+    [Parameter]
+    public CertificateDto Certificate { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        _cvGatorAdminHttpClient = CVGatorHttpClientFactory.Get<CertificateDto>();
+
+        mode = Certificate?.CertificateId == null ? "New" : "Edit";
+    }
+
+    private async void OnSave()
+    {
+        if (Certificate.CertificateId.HasValue)
+            await _cvGatorAdminHttpClient.PutAsync(Certificate.CertificateId.Value, Certificate);
+        else
+            Certificate.CertificateId = await _cvGatorAdminHttpClient.PostAsync(Certificate);
+    }
+
+    private void OnBack()
+    {
+        Navigate.NavigateTo("certificates");
+    }
+
+    private async void OnDelete()
+    {
+        if (Certificate.CertificateId.HasValue)
+        {
+            await _cvGatorAdminHttpClient.DeleteAsync(Certificate.CertificateId.Value);
+            Navigate.NavigateTo("certificates");
+        }
+    }
+}

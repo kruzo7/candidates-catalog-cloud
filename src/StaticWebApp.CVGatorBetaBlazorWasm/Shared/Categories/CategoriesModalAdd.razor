@@ -1,0 +1,91 @@
+﻿@using CVGatorBeta.DTO.Categories;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Candidates;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<button type="button" class="btn btn-warning" @onclick="() => Show()">Add Category</button>
+
+@if (showModal)
+{
+    <div class="modal fade show" tabindex="-1" style="display:block;" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Category to Candidate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @onclick="Hide"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <label class="form-label">
+                            Category:
+                            <CascadingValue Value="this" >
+                                <CategoriesSelect />
+                            </CascadingValue>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="Hide">Close</button>
+                    <button type="button" class="btn btn-primary" @onclick="OnAdd">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private bool showModal;
+
+    public ICollection<CategoryDto>? Categories { get; set; }
+
+    public CandidateCategoryDto candidatesCategory { get; set; } = null!;
+
+    [CascadingParameter]
+    public CandidateCategoriesEdit? CandidateCategoriesEdit { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = await CVGatorHttpClientFactory.Get<CategoryDto>().GetAsync();
+    }
+
+    protected override void OnParametersSet()
+    {
+        showModal = false;
+
+        candidatesCategory = new CandidateCategoryDto()
+            {
+                Category = new CategoryDto()
+            };
+    }
+
+    private void OnAdd()
+    {
+        if (candidatesCategory is not null)
+        {
+            CandidateCategoriesEdit?.CandidateCategories?.Add(candidatesCategory);
+            CandidateCategoriesEdit?.Refresh();
+        }
+
+        Hide();
+    }
+
+    public void Show()
+    {
+        candidatesCategory = new CandidateCategoryDto()
+            {
+                Category = new CategoryDto()
+            };
+
+        showModal = true;
+    }
+
+    public void Hide()
+    {
+        showModal = false;
+    }
+
+    public void OnChange(Guid categoryId)
+    {
+        candidatesCategory.Category = Categories?.FirstOrDefault(x => x.CategoryId == categoryId);
+    }
+}

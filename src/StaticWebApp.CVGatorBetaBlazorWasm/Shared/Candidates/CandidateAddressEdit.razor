@@ -1,0 +1,56 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+@using CVGatorBeta.DTO.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Countries
+
+<h5>Address:</h5>
+
+@if (CandidateAddress is not null)
+{
+    <div class="row">
+        <div class="col-3">
+            <label class="form-label">
+                Country:
+                <CascadingValue Value="this">
+                    <CountriesSelect />
+                </CascadingValue>
+            </label>
+        </div>
+        <div class="col-3">
+            <label class="form-label">
+                City:
+                <InputText @bind-Value="CandidateAddress.CityName" class="form-control" />
+            </label>
+        </div>
+        <div class="col-3">
+            <label class="form-label">
+                Post Code:
+                <InputText @bind-Value="CandidateAddress.PostCode" class="form-control" />
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <label class="form-label">
+                Street:
+                <InputText @bind-Value="CandidateAddress.StreetName" class="form-control" />
+            </label>
+        </div>
+        <div class="col-3">
+            <label class="form-label">
+                Street Number:
+                <InputText @bind-Value="CandidateAddress.StreetNumber" class="form-control" />
+            </label>
+        </div>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public CandidatesAddressDto CandidateAddress { get; set; } = null!;
+
+    public void OnChangeCountry(CountryDto country)
+    {
+        CandidateAddress.Country = country;
+    }
+}

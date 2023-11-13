@@ -1,0 +1,132 @@
+﻿@using CVGatorBeta.DTO.Candidates;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.Commons
+@using CVGatorBeta.Commons.Enums;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Shared.UploadFile
+@inject NavigationManager Navigate;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<div class="row mb-5">
+    <h5>@mode</h5>
+</div>
+
+@if (Candidate != null)
+{
+    <EditForm Model="@Candidate" class="row mb-5">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <label class="form-label">
+                    First Name:
+                    <InputText @bind-Value="Candidate.CandidateFirstName" class="form-control" />
+                </label>
+            </div>
+            <div class="col-3">
+                <label class="form-label">
+                    Last Name:
+                    <InputText @bind-Value="Candidate.CandidateLastName" class="form-control" />
+                </label>
+            </div>
+            <div class="col-3">
+                <label class="form-label">
+                    Birth Date:
+                    <InputDate @bind-Value="Candidate.BirthDate" class="form-control" />
+                </label>
+            </div>
+        </div>
+
+
+        @if (Candidate.CandidateId != null)
+        {
+            var candidateCvFile = Candidate.CandidatesFiles?.FirstOrDefault(x => x.File?.FileResource == (int)FileResource.CandidateCVFile)?.File;
+            var candidateProfilePicFile = Candidate.CandidatesFiles?.FirstOrDefault(x => x.File?.FileResource == (int)FileResource.CandidatePhoto)?.File;
+
+            <div class="row mb-5">
+                <div class="col-3 m-1 p-10">
+                    <UploadFileImage CandidateId="Candidate.CandidateId.Value" File="@candidateProfilePicFile" />
+                </div>
+                <div class="col-3 m-1 p-10">
+                    <UploadFileDocument CandidateId="Candidate.CandidateId.Value" File="@candidateCvFile" />
+                </div>
+            </div>
+        }
+
+        <div class="row mb-5">
+            <CandidateAddressEdit CandidateAddress="Candidate.CandidatesAddress" />
+        </div>
+
+        <div class="row mb-5">
+            <CandidateCategoriesEdit CandidateCategories="Candidate.CandidatesCategories" />
+        </div>
+
+        <div class="row mb-5">
+            <CandidateEmployersEdit CandidateEmployers="Candidate.CandidatesEmployers" />
+        </div>
+
+        <div class="row mb-5">
+            <CandidateSchoolsEdit CandidateSchools="Candidate.CandidatesSchools" />
+        </div>
+
+        <div class="row mb-5">
+            <CandidateCertificatesEdit CandidateCertificates="Candidate.CandidatesCertificates" />
+        </div>
+
+        <div class="row mb-5">
+            <CandidateCoursesEdit CandidateCourses="Candidate.CandidatesCourses" />
+        </div>
+
+        <div class="row mb-5  d-flex justify-content-start">
+            <div class="col-3">
+                <button type="button" class="btn btn-secondary" @onclick="OnCancel">Cancel</button>
+                <button type="button" class="btn btn-primary" @onclick="OnSave">Save</button>
+            </div>
+        </div>
+        @if (Candidate?.CandidateId != null)
+        {
+            <div class="row mb-5 d-flex justify-content-end">
+                <div class="col-3">
+                    <button type="button" class="btn btn-danger right-0" @onclick="OnDelete">Delete Candidate</button>
+                </div>
+            </div>
+        }
+    </EditForm>
+}
+
+@code {
+
+    private CVGatorAdminHttpClient<CandidateDto> _cvGatorAdminHttpClient = null!;
+    private string? mode;
+
+    [Parameter]
+    public CandidateDto Candidate { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        _cvGatorAdminHttpClient = CVGatorHttpClientFactory.Get<CandidateDto>();
+        mode = Candidate?.CandidateId == null ? "New" : "Edit";
+    }
+
+    private async void OnSave()
+    {
+        if (Candidate.CandidateId.HasValue)
+            await _cvGatorAdminHttpClient.PutAsync(Candidate.CandidateId.Value, Candidate);
+        else
+            Candidate.CandidateId = await _cvGatorAdminHttpClient.PostAsync(Candidate);
+    }
+
+    private void OnCancel()
+    {
+        Navigate.NavigateTo("candidates");
+    }
+
+    private async void OnDelete()
+    {
+        if (Candidate.CandidateId.HasValue)
+        {
+            await _cvGatorAdminHttpClient.DeleteAsync(Candidate.CandidateId.Value);
+            Navigate.NavigateTo("candidates");
+        }
+    }
+}

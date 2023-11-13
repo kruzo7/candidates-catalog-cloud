@@ -1,0 +1,22 @@
+﻿@page "/testapi"
+@using CVGatorBeta.DTO.CandidateDetails;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<PageTitle>Test ClientOpenAPIAdmin</PageTitle>
+
+<h1>Test ClientOpenAPIAdmin</h1>
+
+<p>Response: @testText</p>
+
+@code {
+    
+    private string? testText;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var http = CVGatorHttpClientFactory.Get<EmployerDto>();
+        var employers = await http.GetAsync();
+        testText = employers?.First().EmployerName;
+    }
+}

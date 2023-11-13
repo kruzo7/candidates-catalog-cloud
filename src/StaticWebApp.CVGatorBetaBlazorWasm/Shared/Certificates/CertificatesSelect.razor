@@ -1,0 +1,44 @@
+﻿@using CVGatorBeta.DTO.CandidateDetails;
+
+
+<select @bind="SelectedCertificateId" class="form-control">
+    <option value=""></option>
+    @if (Certificates is not null)
+    {
+        foreach (var certificate in Certificates)
+        {
+            <option value="@certificate.CertificateId">@certificate.CertificateName</option>
+        }
+    }
+</select>
+
+@code {
+
+    [CascadingParameter]
+    public CertificatesModalAdd? CertificatesModalAdd { get; set; }
+
+    private Guid? _selectedCertificateId;
+    public Guid? SelectedCertificateId
+    {
+        get { return _selectedCertificateId; }
+
+        set
+        {
+            _selectedCertificateId = value;
+            OnChange();
+        }
+    }
+
+    [Parameter]
+    public ICollection<CertificateDto>? Certificates { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Certificates = CertificatesModalAdd?.Certificates;
+    }
+
+    public void OnChange()
+    {
+        CertificatesModalAdd?.OnChange(SelectedCertificateId.GetValueOrDefault());
+    }
+}

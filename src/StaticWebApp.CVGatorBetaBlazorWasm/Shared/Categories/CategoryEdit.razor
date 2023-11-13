@@ -1,0 +1,76 @@
+﻿@inject NavigationManager Navigate;
+@using CVGatorBeta.DTO.Categories;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject CVGatorHttpClientFactory CVGatorHttpClientFactory;
+
+<h5>@mode</h5>
+
+@if (Category != null)
+{
+    <EditForm Model="@Category" class="row">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <label class="form-label">
+                    Category Name:
+                    <InputText @bind-Value="Category.CategoryName" class="form-control" />
+                </label>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-3">
+                <button type="button" class="btn btn-secondary" @onclick="OnBack">Back</button>
+                <button type="button" class="btn btn-primary" @onclick="OnSave">Save</button>
+            </div>
+        </div>
+        @if (Category?.CategoryId != null)
+        {
+            <div class="row mb-5">
+                <div class="col-3">
+                    <button type="button" class="btn btn-danger" @onclick="OnDelete">Delete</button>
+                </div>
+            </div>
+        }
+    </EditForm>
+}
+
+
+@code {
+
+    private CVGatorAdminHttpClient<CategoryDto> _cvGatorAdminHttpClient = null!;
+    private string? mode;
+
+    [Parameter]
+    public CategoryDto Category { get; set; } = null!;
+
+    protected override void OnParametersSet()
+    {
+        _cvGatorAdminHttpClient = CVGatorHttpClientFactory.Get<CategoryDto>();
+        mode = Category?.CategoryId == null ? "New" : "Edit";
+    }
+
+    private async void OnSave()
+    {
+        if (Category.CategoryId.HasValue)
+            await _cvGatorAdminHttpClient.PutAsync(Category.CategoryId.Value, Category);
+        else
+            Category.CategoryId = await _cvGatorAdminHttpClient.PostAsync(Category);
+    }
+
+    private void OnBack()
+    {
+        Navigate.NavigateTo("categories");
+    }
+
+    private async void OnDelete()
+    {
+        if (Category.CategoryId.HasValue)
+        {
+            await _cvGatorAdminHttpClient.DeleteAsync(Category.CategoryId.Value);
+            Navigate.NavigateTo("categories");
+        }
+    }
+}

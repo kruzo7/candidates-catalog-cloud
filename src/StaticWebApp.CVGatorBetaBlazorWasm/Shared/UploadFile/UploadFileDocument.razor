@@ -1,0 +1,81 @@
+﻿@using CVGatorBeta.Commons.Constatns;
+@using CVGatorBeta.Commons.Enums;
+@using CVGatorBeta.Commons.Interfaces;
+@using CVGatorBeta.DTO.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.Commons;
+@using StaticWebApp.CVGatorBetaBlazorWasm.HttpClients;
+@inject FileHttpClient FileHttpClient;
+@inject IJSRuntime JS
+
+<div class="col">
+    <div class="row">
+        <label class="form-label">
+            CV file:
+        </label>
+        <button class="btn-light btn-sm" @onclick="DownloadFileFromStream">Download</button>
+    </div>
+    <div class="row">
+        <div class="col-5">
+            <UploadFileStatus UploadStatus="@File.UploadFileStatus" Message="@File.Message" />
+        </div>
+    </div>
+    <div class="row m-t-2 fs-6">
+        <InputFile class="form-control" OnChange="Upload" single />
+    </div>
+</div>
+
+
+@code {
+
+    private IJSObjectReference? jsModule;
+
+    [Parameter]
+    public FileDto File { get; set; } = null!;
+
+    [Parameter]
+    public Guid CandidateId { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            jsModule = await JS.InvokeAsync<IJSObjectReference>("import", "./Shared/UploadFile/UploadFileDocument.razor.js");
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        SetFile();
+    }
+
+    private async Task Upload(InputFileChangeEventArgs e)
+    {
+        await FileHttpClient.Upload(e.File, File);
+    }
+
+    private void SetFile()
+    {
+        if (File == null)
+        {
+            File = new FileDto()
+                {
+                    CandidateId = CandidateId,
+                    FileResource = (int)FileResource.CandidateCVFile,
+                    UploadFileStatus = (int)UploadStatus.None,
+
+                };
+        }
+    }
+
+    private async Task DownloadFileFromStream()
+    {
+        if (File.UploadFileStatus == (int)(int)UploadStatus.Processed)
+        {
+            var fileStream = await FileHttpClient.DownloadAsync(File.FileId!.Value);
+
+            using var streamRef = new DotNetStreamReference(stream: fileStream);
+
+            await jsModule!.InvokeVoidAsync("downloadFileFromStream", File.FileName, streamRef);
+        }
+    }
+}

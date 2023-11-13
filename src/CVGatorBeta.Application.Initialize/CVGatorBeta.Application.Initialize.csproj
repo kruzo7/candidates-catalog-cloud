@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CVGatorBeta.Admin.BusinessLogic\CVGatorBeta.Admin.BusinessLogic.csproj" />
+    <ProjectReference Include="..\CVGatorBeta.Admin.EntityFramework\CVGatorBeta.Admin.EntityFramework.csproj" />
+    <ProjectReference Include="..\CVGatorBeta.DTO\CVGatorBeta.DTO.csproj" />
+  </ItemGroup>
+
+</Project>

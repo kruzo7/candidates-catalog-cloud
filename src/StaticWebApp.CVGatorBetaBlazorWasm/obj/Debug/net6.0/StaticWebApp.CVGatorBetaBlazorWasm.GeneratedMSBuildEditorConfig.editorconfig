@@ -1,0 +1,259 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = browser
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = true
+build_property.IncludeAllContentForSelfExtract = 
+build_property.RootNamespace = StaticWebApp.CVGatorBetaBlazorWasm
+build_property.RootNamespace = StaticWebApp.CVGatorBetaBlazorWasm
+build_property.ProjectDir = /home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm
+build_property._RazorSourceGeneratorDebug = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Authentication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXV0aGVudGljYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Candidates/Candidate.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FuZGlkYXRlcy9DYW5kaWRhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Candidates/Candidates.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2FuZGlkYXRlcy9DYW5kaWRhdGVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Categories/Categories.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2F0ZWdvcmllcy9DYXRlZ29yaWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Categories/Category.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2F0ZWdvcmllcy9DYXRlZ29yeS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Certificates/Certificate.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2VydGlmaWNhdGVzL0NlcnRpZmljYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Certificates/Certificates.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ2VydGlmaWNhdGVzL0NlcnRpZmljYXRlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Countries/Countries.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRyaWVzL0NvdW50cmllcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Countries/Country.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRyaWVzL0NvdW50cnkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Courses/Course.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291cnNlcy9Db3Vyc2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Courses/Courses.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291cnNlcy9Db3Vyc2VzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Employers/Employer.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRW1wbG95ZXJzL0VtcGxveWVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Employers/Employers.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRW1wbG95ZXJzL0VtcGxveWVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Schools/School.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2Nob29scy9TY2hvb2wucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Schools/Schools.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2Nob29scy9TY2hvb2xzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/Search/SearchCandidates.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2VhcmNoL1NlYXJjaENhbmRpZGF0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Pages/TestApi.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVGVzdEFwaS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Candidates/CandidateAddressEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhbmRpZGF0ZXMvQ2FuZGlkYXRlQWRkcmVzc0VkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Candidates/CandidateCategoriesEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhbmRpZGF0ZXMvQ2FuZGlkYXRlQ2F0ZWdvcmllc0VkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Candidates/CandidateCertificatesEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhbmRpZGF0ZXMvQ2FuZGlkYXRlQ2VydGlmaWNhdGVzRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Candidates/CandidateCoursesEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhbmRpZGF0ZXMvQ2FuZGlkYXRlQ291cnNlc0VkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Candidates/CandidateEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhbmRpZGF0ZXMvQ2FuZGlkYXRlRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Candidates/CandidateEmployersEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhbmRpZGF0ZXMvQ2FuZGlkYXRlRW1wbG95ZXJzRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Candidates/CandidateSchoolsEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhbmRpZGF0ZXMvQ2FuZGlkYXRlU2Nob29sc0VkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Candidates/CandidatesList.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhbmRpZGF0ZXMvQ2FuZGlkYXRlc0xpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Categories/CategoriesList.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhdGVnb3JpZXMvQ2F0ZWdvcmllc0xpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Categories/CategoriesModalAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhdGVnb3JpZXMvQ2F0ZWdvcmllc01vZGFsQWRkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Categories/CategoriesSelect.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhdGVnb3JpZXMvQ2F0ZWdvcmllc1NlbGVjdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Categories/CategoryEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhdGVnb3JpZXMvQ2F0ZWdvcnlFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Certificates/CertificateEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NlcnRpZmljYXRlcy9DZXJ0aWZpY2F0ZUVkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Certificates/CertificatesList.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NlcnRpZmljYXRlcy9DZXJ0aWZpY2F0ZXNMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Certificates/CertificatesModalAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NlcnRpZmljYXRlcy9DZXJ0aWZpY2F0ZXNNb2RhbEFkZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Certificates/CertificatesSelect.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NlcnRpZmljYXRlcy9DZXJ0aWZpY2F0ZXNTZWxlY3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Commons/Pagination.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NvbW1vbnMvUGFnaW5hdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Countries/CountriesList.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NvdW50cmllcy9Db3VudHJpZXNMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Countries/CountriesSelect.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NvdW50cmllcy9Db3VudHJpZXNTZWxlY3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Countries/CountryEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NvdW50cmllcy9Db3VudHJ5RWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Courses/CourseEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NvdXJzZXMvQ291cnNlRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Courses/CoursesList.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NvdXJzZXMvQ291cnNlc0xpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Courses/CoursesModalAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NvdXJzZXMvQ291cnNlc01vZGFsQWRkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Courses/CoursesSelect.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NvdXJzZXMvQ291cnNlc1NlbGVjdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Employers/EmployerEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0VtcGxveWVycy9FbXBsb3llckVkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Employers/EmployersList.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0VtcGxveWVycy9FbXBsb3llcnNMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Employers/EmployersModalAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0VtcGxveWVycy9FbXBsb3llcnNNb2RhbEFkZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Employers/EmployersSelect.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0VtcGxveWVycy9FbXBsb3llcnNTZWxlY3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/LoginDisplay.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0xvZ2luRGlzcGxheS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/RedirectToLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1JlZGlyZWN0VG9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Schools/SchoolEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1NjaG9vbHMvU2Nob29sRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Schools/SchoolsList.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1NjaG9vbHMvU2Nob29sc0xpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Schools/SchoolsModalAdd.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1NjaG9vbHMvU2Nob29sc01vZGFsQWRkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/Schools/SchoolsSelect.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1NjaG9vbHMvU2Nob29sc1NlbGVjdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1N1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/UploadFile/UploadFileDocument.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1VwbG9hZEZpbGUvVXBsb2FkRmlsZURvY3VtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/UploadFile/UploadFileImage.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1VwbG9hZEZpbGUvVXBsb2FkRmlsZUltYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/UploadFile/UploadFileStatus.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1VwbG9hZEZpbGUvVXBsb2FkRmlsZVN0YXR1cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-iojq9ee47z
+
+[/home/waldek/500GB/Programowanie/Net/CandidatesCatalog/src/StaticWebApp.CVGatorBetaBlazorWasm/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-kq0iq2xkq2
